@@ -42,7 +42,7 @@
         var addressVal = $("#address").val();
         var aadhaarVal = $("#aadhaar").val();
         console.log(check);
-        var time = 1;
+        var tim = 1;
         if(check == true){
             $.post("process.jsp",
                 {
@@ -56,7 +56,7 @@
                     if(status == "success")
                     {
                         //populating content row
-                        time = response[1][0].time;
+                        tim = response[1][0].time;
                         response = response[0];
                         var content = '';
                         
@@ -70,7 +70,7 @@
 
                         $("#content-tbody").html(content);
                         $("#myModal").modal('show');
-                        $(".modal-title").html("Transaction Details of Pan " + $("#pan").val() + " in " + time + "s");
+                        $(".modal-title").html("Transaction details for the given parameters obtained in " + tim + "s ");
                     }
                     
                 }
