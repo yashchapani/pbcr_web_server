@@ -45,11 +45,11 @@
 						<input class="input2" type="text" name="name" id="name">
 						<span class="focus-input2" data-placeholder="Name"></span>
 					</div>
-					<div class="wrap-input2 validate-input" data-validate="Name detail is required">
+					<div class="wrap-input2 validate-input" data-validate="Address detail is required">
 						<input class="input2" type="text" name="address" id="address">
 						<span class="focus-input2" data-placeholder="Address"></span>
 					</div>
-					<div class="wrap-input2 validate-input" data-validate="Name detail is required">
+					<div class="wrap-input2 validate-input" data-validate="Aadhaar detail is required">
 						<input class="input2" type="text" name="aadhaar" id="aadhaar">
 						<span class="focus-input2" data-placeholder="Aadhaar"></span>
 					</div>

@@ -6,8 +6,6 @@
 
 <%!	
 	public ArrayList<Result> merge(ArrayList<Result> result, ArrayList<Result> result1){
-		if(result.size() == 0)
-			return result1;
 		int i,j;
         for(i = 0,j = 0; i < result.size() && j < result1.size();){
             long id1 = result.get(i).getTransactionId();
@@ -31,42 +29,62 @@
 	}
 %>
 <%
-	long startTime = System.nanoTime();
-	ArrayList<Result> result = new ArrayList<>();
+	String hash = "1220e81e9caed8b70129ece1fa71dd7b0cfd948cdcab0727112607d6ad21eb2a1c18";
+	int nt = 8;
+	int f = 0;
 	String pan = request.getParameter("pan");
 	String name = request.getParameter("name");
 	String address = request.getParameter("address");
 	String aadhaar = request.getParameter("aadhaar");
+	long startTime = System.nanoTime();
+	ArrayList<Result> result = new ArrayList<>();
 	if(!"".equals(pan)){
-		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(1, "pan", pan, "12208ccc1b9def2c8c4710a94d65cadfed0d136ee5d6bfab185b7942d43490376889");
+		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(nt, "pan", pan, hash);
 		Collections.sort(result1);
-		result = merge(result, result1);
+		if(f == 0){
+			f = 1;
+			result = result1;
+		}
+		else{
+			result = merge(result, result1);
+		}
 	}
 	if(!"".equals(name)){
-		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(1, "name", name, "12208ccc1b9def2c8c4710a94d65cadfed0d136ee5d6bfab185b7942d43490376889");
+		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(nt, "name", name, hash);
 		Collections.sort(result1);
-		result = merge(result, result1);
+		if(f == 0){
+			f = 1;
+			result = result1;
+		}
+		else{
+			result = merge(result, result1);
+		}
 	}
 	if(!"".equals(address)){
-		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(1, "address", address, "12208ccc1b9def2c8c4710a94d65cadfed0d136ee5d6bfab185b7942d43490376889");
+		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(nt, "address", address, hash);
 		Collections.sort(result1);
-		result = merge(result, result1);
+		if(f == 0){
+			f = 1;
+			result = result1;
+		}
+		else{
+			result = merge(result, result1);
+		}
 	}
 	if(!"".equals(aadhaar)){
-		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(1, "aadhaar", aadhaar, "12208ccc1b9def2c8c4710a94d65cadfed0d136ee5d6bfab185b7942d43490376889");
+		ArrayList<Result> result1 = SingleVsMulti.findTransactionDetails(nt, "aadhaar", aadhaar, hash);
 		Collections.sort(result1);
-		result = merge(result, result1);
+		if(f == 0){
+			f = 1;
+			result = result1;
+		}
+		else{
+			result = merge(result, result1);
+		}
 	}
-	// Collections.sort(result);
-	// for(int i = 1; i < result.size(); i++){
-	//     long id = result.get(i - 1).getTransactionId();
-	//     if(result.get(i).getTransactionId() == id){
-	//         result.remove(i);
-	//         i--;
-	//     }
-	// }
 	long endTime = System.nanoTime();
 	double totalTime = ((double)(endTime - startTime)) / 1000000000;
+
 	Gson gson = new Gson();
 	String jsn = gson.toJson(result);
 	String timeJsn = "[{\"time\":" + (gson.toJson(totalTime)).substring(0,6) + "}]";
