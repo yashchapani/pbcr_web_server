@@ -49,6 +49,10 @@
 						<input class="input2" type="text" name="address" id="address">
 						<span class="focus-input2" data-placeholder="Address"></span>
 					</div>
+					<div class="wrap-input2 validate-input" data-validate="DOB detail is required">
+						<input class="input2" type="text" name="dob" id="dob">
+						<span class="focus-input2" data-placeholder="DOB"></span>
+					</div>		
 					<div class="wrap-input2 validate-input" data-validate="Aadhaar detail is required">
 						<input class="input2" type="text" name="aadhaar" id="aadhaar">
 						<span class="focus-input2" data-placeholder="Aadhaar"></span>
